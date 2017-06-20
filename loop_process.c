@@ -16,7 +16,7 @@ int main (int argc, char ** argv)
 
   for (iter = 0; iter <n_process; iter++)
   {
-    sprintf(command,"./loop &");
+    sprintf(command,"./loop %d %d &", 50000000, 1);
     system(command);
   }
 
