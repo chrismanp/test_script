@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
   	exit(EXIT_FAILURE);
   }
 
-  int n_iter = 1000;
+  int n_iter = 7000;
   int iter = 0;
 
   memset(myBufferOut, '\0', BUFFER_SIZE);
