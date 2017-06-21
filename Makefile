@@ -1,4 +1,4 @@
-all: server client loop loop_forever loop_process server_vm client_vm
+all: server client loop loop_forever loop_process server_vm client_vm loop_profiling
 
 objdir=./obj
 
@@ -16,6 +16,9 @@ client_vm: $(objdir)/client_vm.o
 	$(CC) -o $@ $<
 
 loop: $(objdir)/loop.o
+	$(CC) -o $@ $< -lpthread
+
+loop_profiling: $(objdir)/loop_profiling.o
 	$(CC) -o $@ $< -lpthread
 
 loop_forever: $(objdir)/loop_forever.o
