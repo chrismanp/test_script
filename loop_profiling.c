@@ -30,7 +30,7 @@ int main(int argc, char ** argv)
 
   if(argc != 3 && argc != 1)
   {
-    printf("Usage : ./loop [number of iteration : default = 500000000] [number of thread : default = 1]\n");
+    printf("Usage : ./loop [number of iteration : default = 50000000] [number of thread : default = 20]\n");
     exit(EXIT_FAILURE);
   }
   int n_iter = 0;
@@ -42,8 +42,8 @@ int main(int argc, char ** argv)
   }
   else
   {
-    n_iter = 500000000; // Around 9.5-10 second
-    n_thread = 1;
+    n_iter = 50000000; // Around 1 second
+    n_thread = 20;
   }
   
   /* Time here */
