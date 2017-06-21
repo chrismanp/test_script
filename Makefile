@@ -1,4 +1,4 @@
-all: server client loop loop_forever loop_process 
+all: server client loop loop_forever loop_process server_vm client_vm
 
 objdir=./obj
 
@@ -7,6 +7,12 @@ server: $(objdir)/server.o
 	$(CC) -o $@ $<
 
 client: $(objdir)/client.o
+	$(CC) -o $@ $<
+
+server_vm: $(objdir)/server_vm.o
+	$(CC) -o $@ $<
+
+client_vm: $(objdir)/client_vm.o
 	$(CC) -o $@ $<
 
 loop: $(objdir)/loop.o
@@ -25,3 +31,6 @@ $(objdir)/%.o: %.c
 clean:
 	if [ -d $(objdir) ] ; then rm -r $(objdir); fi
 	rm server client loop loop_forever loop_process 
+
+plot: plot/*.plt log_time_cdf/*.log
+	gnuplot plot/*.plt
