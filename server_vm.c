@@ -20,7 +20,7 @@ void spawn_process(int n)
   char command[100];
   for(i = 0; i<n; i++)
   {
-    sprintf(command,"./loop_forever.o &");
+    sprintf(command,"./loop_forever &");
     system(command);
   }
 }
