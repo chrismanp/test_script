@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <time.h>
+#include <arpa/inet.h>
 
 #define SECOND_2_NANOS 1000000000
 

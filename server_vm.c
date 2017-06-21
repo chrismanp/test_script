@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <arpa/inet.h>
 
 #define BACK_LOG 5
 #define BUFFER_SIZE 1000
