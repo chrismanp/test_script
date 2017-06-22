@@ -67,7 +67,7 @@ int main(int argc, char ** argv)
     exit(EXIT_FAILURE);
   }
 
-  for(iter_test = 1; iter_test <= n_thread; iter_test+=2)
+  for(iter_test = 1; iter_test <= n_thread; iter_test+=1)
   {
     clock_gettime(CLOCK_MONOTONIC, &startTime);
     for(iter_thread = 0; iter_thread<iter_test; iter_thread++)
@@ -88,9 +88,9 @@ int main(int argc, char ** argv)
     lStart_t = startTime.tv_sec * SECOND_2_NANOS + startTime.tv_nsec; 
     lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
     
-    fprintf(f_profile, "%d\t%lf\n", iter_test, (float)(lEnd_t - lStart_t)/SECOND_2_NANOS);
+    fprintf(f_profile, "%d\t%lf\n", iter_test, (float)(lEnd_t - lStart_t));
     fflush(f_profile);
-    printf("%d\t%lf\n", iter_test, (float)(lEnd_t - lStart_t)/SECOND_2_NANOS);
+    printf("%d\t%lf\n", iter_test, (float)(lEnd_t - lStart_t));
         
 
     usleep(20000);
