@@ -12,7 +12,7 @@
 #include <arpa/inet.h>
 
 #define BACK_LOG 5
-#define BUFFER_SIZE 2048
+#define BUFFER_SIZE 1024
 
 void spawn_process(int n)
 {

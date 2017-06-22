@@ -15,7 +15,7 @@
 #define SECOND_2_NANOS 1000000000
 
 #define BACK_LOG 5
-#define BUFFER_SIZE 2048
+#define BUFFER_SIZE 1024
 
 int main(int argc, char ** argv)
 {
