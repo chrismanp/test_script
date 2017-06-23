@@ -100,11 +100,11 @@ int main(int argc, char * argv[])
 
     /* Connection established */
     if( (n_readbytes = read(accept_sockfd, myInBuffer, BUFFER_SIZE)) < 0)
-      perror("read");
+      break;
 
     /* Write response */
     if(write(accept_sockfd, myInBuffer, BUFFER_SIZE) < 0)
-      perror("write");
+      break;
 
   }
 
