@@ -92,19 +92,21 @@ int main(int argc, char * argv[])
     exit(EXIT_FAILURE);
   }
 
-
+  /* Connection established */
   while(1)
   {
     memset(myOutBuffer, '\0', BUFFER_SIZE);
     memset(myInBuffer, '\0', BUFFER_SIZE);
 
-    /* Connection established */
+    
     if( (n_readbytes = read(accept_sockfd, myInBuffer, BUFFER_SIZE)) < 0)
+      perror("read");
+    else if(n_readbytes == 0)
       break;
 
     /* Write response */
     if(write(accept_sockfd, myInBuffer, BUFFER_SIZE) < 0)
-      break;
+      perror("write");
 
   }
 
