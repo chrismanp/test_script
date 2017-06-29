@@ -9,10 +9,13 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <time.h>
 #include <arpa/inet.h>
 
 #define BACK_LOG 5
 #define BUFFER_SIZE 1024
+
+#define SECOND_2_NANOS 1000000000
 
 void spawn_process(int n)
 {
@@ -84,6 +87,11 @@ int main(int argc, char * argv[])
   char myOutBuffer[BUFFER_SIZE];
   int n_readbytes = 0;
 
+  struct timespec endTime;
+  memset(&endTime, 0, sizeof(endTime));
+  long int lEnd_t = 0;
+
+
 
   /* Sleep until connected to a client */
   accept_sockfd = accept(listen_sockfd, (struct sockaddr*) &cl_addr, (socklen_t *) &cl_len);
@@ -105,8 +113,12 @@ int main(int argc, char * argv[])
     else if(n_readbytes == 0)
       break;
 
+    clock_gettime(CLOCK_MONOTONIC, &endTime);
+    lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
+    sprintf(myOutBuffer, "%ld\n", lEnd_t);
+
     /* Write response */
-    if(write(accept_sockfd, myInBuffer, BUFFER_SIZE) < 0)
+    if(write(accept_sockfd, myOutBuffer, BUFFER_SIZE) < 0)
       perror("write");
 
   }

@@ -97,14 +97,15 @@ int main(int argc, char ** argv)
   	  
     /* Timed here */
     clock_gettime(CLOCK_MONOTONIC, &endTime);
-    printf("Receive : %s", myBufferIn);
-
+    
     /* Measure the time */
     lStart_t = startTime.tv_sec * SECOND_2_NANOS + startTime.tv_nsec; 
     lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
 
-    long diff_t = lEnd_t - lStart_t;
-  	/* Write the statistics here */
+
+    long diff_t = atol(myBufferIn) - lStart_t;
+  	printf("Receive : %ld", diff_t);
+    /* Write the statistics here */
     fprintf(f_record, "%lu\n", diff_t);
     fflush(f_record);
     usleep(20000);
