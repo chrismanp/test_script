@@ -113,20 +113,20 @@ int main(int argc, char * argv[])
     memset(myInBuffer, '\0', BUFFER_SIZE);
 
     gettimeofday(&start_tv, NULL);
-    if( (n_readbytes = read(accept_sockfd, myInBuffer, BUFFER_SIZE)) < 0)
+    lStart_t = start_tv.tv_sec * 1000000 + start_tv.tv_sec;
+    n_readbytes = read(accept_sockfd, myInBuffer, BUFFER_SIZE);
+    gettimeofday(&end_tv, NULL);
+    lEnd_t = end_tv.tv_sec * 1000000 + end_tv.tv_usec;
+
+    if( (n_readbytes) < 0)
       perror("read");
     else if(n_readbytes == 0)
       break;
-
-    gettimeofday(&end_tv, NULL);
-    clock_gettime(CLOCK_MONOTONIC, &endTime);
     
-    lEnd_t = end_tv.tv_sec * 1000000 + end_tv.tv_usec;
-    lStart_t = start_tv.tv_sec * 1000000 + start_tv.tv_sec;
-
+  
     //lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
     sprintf(myOutBuffer, "%lu\n", lEnd_t - lStart_t);
-    //printf("Time recieved : %lu\n", lEnd_t - lStart_t);
+    printf("Time recieved : %lu [%lu - %lu]\n", lEnd_t - lStart_t, lEnd_t, lStart_t);
 
     /* Write response */
     if(write(accept_sockfd, myOutBuffer, BUFFER_SIZE) < 0)
