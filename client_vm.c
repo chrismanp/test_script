@@ -70,6 +70,8 @@ int main(int argc, char ** argv)
   int n_iter = 7000;
   int iter = 0;
 
+  struct timeval start_tv;
+
   memset(myBufferOut, '\0', BUFFER_SIZE);
   memset(myBufferIn, '\0', BUFFER_SIZE);
 
@@ -80,6 +82,7 @@ int main(int argc, char ** argv)
   	/* Timed here */
   	clock_gettime(CLOCK_MONOTONIC, &startTime);
   	/* Send the message */
+    gettimeofday(&start_tv, NULL);
   	n = write(sockfd, myBufferOut, BUFFER_SIZE);
   	if(n < 0)
     {
@@ -99,14 +102,15 @@ int main(int argc, char ** argv)
     clock_gettime(CLOCK_MONOTONIC, &endTime);
     
     /* Measure the time */
-    lStart_t = startTime.tv_sec * SECOND_2_NANOS + startTime.tv_nsec; 
+    //lStart_t = startTime.tv_sec * SECOND_2_NANOS + startTime.tv_nsec; 
+    lStart_t = start_tv.tv_sec * 1000000 + start_tv.tv_usec;
     lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
 
 
-    long diff_t = atol(myBufferIn) - lStart_t;
-  	printf("Receive : %ld", diff_t);
+    long diff_t = lStart_t - atol(myBufferIn) ;
+  	printf("Receive : %ld - [%lu - %lu]\n", diff_t, lEnd_t/1000, lStart_t);
     /* Write the statistics here */
-    fprintf(f_record, "%lu\n", diff_t);
+    fprintf(f_record, "%lu\n", diff_t );
     fflush(f_record);
     usleep(20000);
       
