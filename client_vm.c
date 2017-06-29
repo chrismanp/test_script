@@ -11,6 +11,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <arpa/inet.h>
+#include <sys/time.h>
 
 #define SECOND_2_NANOS 1000000000
 
@@ -107,8 +108,8 @@ int main(int argc, char ** argv)
     lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
 
 
-    long diff_t = lStart_t - atol(myBufferIn) ;
-  	printf("Receive : %ld - [%lu - %lu]\n", diff_t, lEnd_t/1000, lStart_t);
+    long diff_t = atol(myBufferIn);
+  	printf("Receive : %lu - [%d]\n", diff_t, iter);
     /* Write the statistics here */
     fprintf(f_record, "%lu\n", diff_t );
     fflush(f_record);
