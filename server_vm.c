@@ -115,6 +115,7 @@ int main(int argc, char * argv[])
     gettimeofday(&start_tv, NULL);
     lStart_t = start_tv.tv_sec * 1000000 + start_tv.tv_sec;
     n_readbytes = read(accept_sockfd, myInBuffer, BUFFER_SIZE);
+#if 0    
     gettimeofday(&end_tv, NULL);
     lEnd_t = end_tv.tv_sec * 1000000 + end_tv.tv_usec;
 
@@ -127,9 +128,9 @@ int main(int argc, char * argv[])
     //lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
     sprintf(myOutBuffer, "%lu\n", lEnd_t - lStart_t);
     printf("Time recieved : %lu [%lu - %lu]\n", lEnd_t - lStart_t, lEnd_t, lStart_t);
-
+#endif 
     /* Write response */
-    if(write(accept_sockfd, myOutBuffer, BUFFER_SIZE) < 0)
+    if(write(accept_sockfd, myInBuffer, BUFFER_SIZE) < 0)
       perror("write");
 
   }

@@ -82,9 +82,9 @@ int main(int argc, char ** argv)
     sprintf(myBufferOut, "%d\n", iter);
   	/* Timed here */
   	clock_gettime(CLOCK_MONOTONIC, &startTime);
-  	/* Send the message */
-    gettimeofday(&start_tv, NULL);
-  	n = write(sockfd, myBufferOut, BUFFER_SIZE);
+  	//gettimeofday(&start_tv, NULL);
+    /* Send the message */
+    n = write(sockfd, myBufferOut, BUFFER_SIZE);
   	if(n < 0)
     {
       perror("write");
@@ -98,17 +98,16 @@ int main(int argc, char ** argv)
       perror("read");
       exit(EXIT_FAILURE);
     }
-  	  
     /* Timed here */
     clock_gettime(CLOCK_MONOTONIC, &endTime);
     
     /* Measure the time */
-    //lStart_t = startTime.tv_sec * SECOND_2_NANOS + startTime.tv_nsec; 
-    lStart_t = start_tv.tv_sec * 1000000 + start_tv.tv_usec;
+    lStart_t = startTime.tv_sec * SECOND_2_NANOS + startTime.tv_nsec; 
+    //lStart_t = start_tv.tv_sec * 1000000 + start_tv.tv_usec;
     lEnd_t = endTime.tv_sec * SECOND_2_NANOS + endTime.tv_nsec; 
 
 
-    long diff_t = atol(myBufferIn);
+    long diff_t = lEnd_t - lStart_t;
   	printf("Receive : %lu - [%d]\n", diff_t, iter);
     /* Write the statistics here */
     fprintf(f_record, "%lu\n", diff_t );
